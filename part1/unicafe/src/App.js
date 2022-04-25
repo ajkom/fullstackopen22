@@ -4,15 +4,26 @@ const Header = ({name}) => {
   return (<h1> {name} </h1>)
 }
 
-const Button = ({name, action}) => {
-  <button onClick={action}>{name}</button>
-}
-
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+
+  const average = () => {
+    let count = good + bad + neutral
+    let sum = good - bad
+    if (count > 0)    
+      return sum / count
+    return 0
+  }
+
+  const positive = () => {
+    let count = good + bad + neutral
+    if (count > 0)
+      return good/count * 100
+    return 0
+  }
 
 
   return (
@@ -25,6 +36,9 @@ const App = () => {
       <p>good {good}</p>
       <p>neutral {neutral}</p>
       <p>bad {bad}</p>
+      <p>all {good + bad + neutral}</p>
+      <p>average {average()}</p>
+      <p>positive {positive()}%</p>
     </div>
   )
 }
