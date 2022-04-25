@@ -12,7 +12,7 @@ const App = () => {
   ]
 
   const [data, setData] = useState({
-    selected: 0,
+    selected: Math.floor((Math.random() * anecdotes.length-1) + 1),
     votes: Array(anecdotes.length).fill(0)
   })
 
@@ -38,13 +38,29 @@ const App = () => {
     setData(newData)
   }
 
+  const getBestAnecdote = () => {
+    let biggest = Math.max(...data.votes)
+    let i = data.votes.indexOf(biggest)
+    return (
+      <div>
+        {anecdotes[i]}
+        <p>has {biggest} vote(s)</p>
+      </div>
+    )
+  }
+
+
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       <p>{anecdotes[data.selected]}</p>
       <p>has {data.votes[data.selected]} vote(s)</p>
 
       <button onClick={handleClickVote}>vote</button>
       <button onClick={handleClickNext}>next anecdote</button>
+
+      <h2>Anecdote with the most votes</h2>
+      {getBestAnecdote()}
     </div>
   )
 }
