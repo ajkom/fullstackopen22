@@ -4,6 +4,20 @@ const Header = ({name}) => {
   return (<h1> {name} </h1>)
 }
 
+const Statictics = (props) => {
+  return (
+    <div>
+      <Header name="statistics" />
+
+      <p>good{props.good}</p>
+      <p>neutral {props.neutral}</p>
+      <p>bad {props.bad}</p>
+      <p>all {props.good + props.bad + props.neutral}</p>
+      <p>average {props.average()}</p>
+      <p>positive {props.positive()}%</p>
+    </div>)
+}
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -32,13 +46,9 @@ const App = () => {
       <button onClick={() => setGood(good+1)}>{"good"}</button>
       <button onClick={() => setNeutral(neutral+1)}>{"neutral"}</button>
       <button onClick={() => setBad(bad+1)}>{"bad"}</button>
-      <Header name="statistics" />
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>all {good + bad + neutral}</p>
-      <p>average {average()}</p>
-      <p>positive {positive()}%</p>
+
+      <Statictics good={good} bad={bad} neutral={neutral}
+      positive={() => positive()} average={() => average()}/>
     </div>
   )
 }
