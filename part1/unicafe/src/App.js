@@ -4,20 +4,22 @@ const Header = ({name}) => <h1> {name} </h1>
 
 const Button = ({name, action}) => <button onClick={action}>{name}</button>
 
-const StatisticLine = ({text, value}) => <p>{text} {value}</p>
+const StatisticLine = ({text, value}) => <tr><td>{text}</td><td>{value}</td></tr>
 
 const Statictics = (props) => {
   let total = props.good + props.bad + props.neutral
   if (total > 0)
     return (
-      <div>
+      <table>
+        <tbody>
         <StatisticLine text="good" value={props.good} />
         <StatisticLine text="neutral" value={props.neutral} />
         <StatisticLine text="bad" value={props.bad} />
         <StatisticLine text="all" value={total} />
         <StatisticLine text="average" value={props.average()} />
         <StatisticLine text="positive" value={props.positive()} />
-      </div>
+        </tbody>
+      </table>
     )
   return <p>No feedback given</p>
 }
